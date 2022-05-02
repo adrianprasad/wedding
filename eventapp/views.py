@@ -42,8 +42,7 @@ class RegistrationView(View):
 @login_required
 def profile(request):
     addresses = Address.objects.filter(user=request.user)
-
-    return render(request, 'login/profile.html')
+    return render(request, 'login/profile.html',{'addresses':addresses})
 
 
 @login_required
@@ -97,25 +96,6 @@ def remove_cart(request, cart_id):
     return redirect('login:cart')
 
 
-@login_required
-def plus_cart(request, cart_id):
-    if request.method == 'GET':
-        cp = get_object_or_404(Cart, id=cart_id)
-        cp.quantity += 1
-        cp.save()
-    return redirect('login:cart')
-
-
-@login_required
-def minus_cart(request, cart_id):
-    if request.method == 'GET':
-        cp = get_object_or_404(Cart, id=cart_id)
-        if cp.quantity == 1:
-            cp.delete()
-        else:
-            cp.quantity -= 1
-            cp.save()
-    return redirect('login:cart')
 
 def all_categories(request):
     categories = EventCategory.objects.filter(is_active=True)

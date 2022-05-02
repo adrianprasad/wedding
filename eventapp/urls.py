@@ -12,8 +12,7 @@ urlpatterns = [
     path('gallery', views.gallery, name='gallery'),
     path('add-to-cart/', views.add_to_cart, name="add-to-cart"),
     path('remove-cart/<int:cart_id>/', views.remove_cart, name="remove-cart"),
-    path('plus-cart/<int:cart_id>/', views.plus_cart, name="plus-cart"),
-    path('minus-cart/<int:cart_id>/', views.minus_cart, name="minus-cart"),
+    
     path('product/<slug:slug>/', views.detail, name="product-detail"),
     path('categories/', views.all_categories, name="all-categories"),
     path('event/contact/', views.contact, name="contact"),
