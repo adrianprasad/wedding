@@ -23,7 +23,7 @@
             <li class="active"><a href="{% url 'login:home' %}"><span>Home</span></a></li>
             <li><a href="about.html"><span>About</span></a></li>
             <li><a href="blog.html"><span>Events</span></a></li>
-            <li><a href="contact.html"><span>Contact</span></a></li>
+            <li><a href="#"><span>Show  Booking Details</span></a></li>
             <ul class="navbar-nav ml-auto"> 
               {% if request.user.is_authenticated %}           
                 
@@ -32,7 +32,7 @@
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-alt mr-1 text-gray"></i>My Account</a></a>
                 
                 <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
-                  <!-- <hr> -->
+                  <hr>
                   <a class="dropdown-item border-0 transition-link" href="{% url 'login:logout' %}">Log Out</a>
                   
               </li>
