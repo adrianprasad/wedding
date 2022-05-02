@@ -1,3 +1,4 @@
+from django.forms import IntegerField
 from django.shortcuts import render
 from unicodedata import category
 import django
@@ -23,7 +24,8 @@ def about(request):
 def gallery(request):
     return render(request,'./event/gallery.html')
 
-
+def contact(request):
+    return render(request,'./event/contact.html')
 
 class RegistrationView(View):
     def get(self, request):
@@ -61,29 +63,29 @@ def add_to_cart(request):
     return redirect('store:cart')
 
 
-# @login_required
-# def cart(request):
-#     user = request.user
-#     cart_products = Cart.objects.filter(user=user)
+@login_required
+def cart(request):
+    user = request.user
+    cart_products = Cart.objects.filter(user=user)
 
-#     amount = decimal.Decimal(0)
-#     shipping_amount = decimal.Decimal(10)
-#     cp = [p for p in Cart.objects.all() if p.user==user]
-#     if cp:
-#         for p in cp:
-#             temp_amount = (p.quantity * p.product.price)
-#             amount += temp_amount
+    amount = IntegerField()
+    shipping_amount = IntegerField(10)
+    cp = [p for p in Cart.objects.all() if p.user==user]
+    if cp:
+        for p in cp:
+            temp_amount = (p.quantity * p.product.amount)
+            amount += temp_amount
 
-#     addresses = Address.objects.filter(user=user)
+    addresses = Address.objects.filter(user=user)
 
-#     context = {
-#         'cart_products': cart_products,
-#         'amount': amount,
-#         'shipping_amount': shipping_amount,
-#         'total_amount': amount + shipping_amount,
-#         'addresses': addresses,
-#     }
-#     return render(request, 'store/cart.html', context)
+    context = {
+        'cart_products': cart_products,
+        'amount': amount,
+        'shipping_amount': shipping_amount,
+        'total_amount': amount + shipping_amount,
+        'addresses': addresses,
+    }
+    return render(request, './event/cart.html', context)
 
 
 @login_required

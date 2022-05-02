@@ -16,6 +16,7 @@ urlpatterns = [
     path('minus-cart/<int:cart_id>/', views.minus_cart, name="minus-cart"),
     path('product/<slug:slug>/', views.detail, name="product-detail"),
     path('categories/', views.all_categories, name="all-categories"),
+    path('event/contact/', views.contact, name="contact"),
     path('<slug:slug>/', views.category_products, name="category-products"),
     path('showpage',views.showpage,name='showpage'),
     path('login/register/', views.RegistrationView.as_view(), name='register'),
