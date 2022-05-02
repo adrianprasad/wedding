@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+<form method="post" action="{% url 'login:addcat' %}" enctype="multipart/form-data" style="width:30%; " >
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Category Title</label>
+        <input type="text" name="title" class="form-control" placeholder="Category Title" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label> Description</label>
+        <input type="text" class="form-control" name="description" placeholder="Description" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label> Image </label>
+        <input type="file" class="form-control" name="category_image"  required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Is Active </label>
+        <input type="checkbox" class="form-control" name="is_active" checked >
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Is Featured </label>
+        <input type="checkbox" class="form-control" name="is_featured" checked >
+    </div>
+    <br>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-outline-success">submit</button>
+    </div>
+    <br>
+</form>
+</div>
+{% endblock content %}

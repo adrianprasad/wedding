@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Add Product</h1>
+<form method="post" action="{% url 'store:addpro' %}" enctype="multipart/form-data" style="width:30%; " >
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Product Title</label>
+        <input type="text" name="title" class="form-control" placeholder="Category Title" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Product List</label>
+        <input type="text" name="slug" class="form-control" placeholder=" List" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Product Description</label>
+        <input type="text" name="detail_description" class="form-control" placeholder=" List" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Product Price</label>
+        <input type="number" name="price" class="form-control" Price=" List" required>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Category</label>
+        <select name="category" class="form-control">
+            {% for i in we %}
+            <option value="{{ i.id }}">
+                {{ i.title }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Product Image</label>
+        <input type="file" class="form-control" name="file"  required>
+    </div>
+    <div class="form-group">
+        <label>Is Active </label>
+        <input type="checkbox" class="form-control" name="is_active"  checked>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Is Featured </label>
+        <input type="checkbox" class="form-control" name="is_featured"  checked>
+    </div>
+    <br>
+   
+    <div class="form-group">
+        <button type="submit" class="btn btn-outline-success">submit</button>
+    </div>
+    <br>
+</form>
+</div>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="table-responsive table table-striped">
+    <table  class="table">
+
+ Product Table 
+<div class="table-responsive table table-striped">
+    
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Title  </th>
+                <th>Product Slug</th>
+                <th>Category</th>
+                <th>Detail Description</th>
+                <th>Product Image</th>
+                <th>Product Price</th>
+                <th colspan="2">Action</th>
+                           
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in all %}
+            <tr style="padding: 3px;">
+                <td>{{ i.id }}</td>
+                <td>{{ i.title}}</td>
+                <td>{{ i.slug}}</td>
+                <td>{{ i.category}}</td>
+                <td>{{ i.detail_description }}</td>
+                <td>
+                    <img src="{{ i.product_image.url }}" style="height: 350px; width: 200px;"> </td>
+                <td>{{ i.price }}</td>
+                <td class="btn btn-light " ><a href="#"> Edit </a></td>
+                <td class="btn btn-light " ><a href="#"> Delete </a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+{% endblock content %}
