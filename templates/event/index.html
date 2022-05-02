@@ -3,7 +3,7 @@
     {% block content %}
     <div class="hero" style="background-image: url('/static/images/hero_1.jpg');"></div>
     <div class="container bg-dark">
-        <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url('static/img/Apple-iPhone13-Pro.jpg') ">
+        <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url('static/images/banner.jpg;') ">
           <div class="container py-5">
             <div class="row px-4 px-lg-5">
               <div class="col-lg-6">
@@ -27,11 +27,11 @@
               <div class="col-md-4 mb-4 mb-md-0">
                 <a class="category-item" href="{% url 'login:category-products' category.slug %}">
                   {% if category.category_image %}
-                    <img class="img-fluid" src="{{ category.category_image.url }}" alt="{{ category.title }}">
+                    <img class="img-fluid" src="{{ category.image.url }}" alt="{{ category.title }}">
                     {% else %}
-                    <img class="img-fluid" src="{% static 'img/cat-img-1.jpg' %}" alt="{{ category.title }}">
+                    <img class="img-fluid" src="{% static 'images/cat-img-1.jpg' %}" alt="{{ category.title }}">
                   {% endif %}
-                  <strong class="category-item-title">{{ category.title }}</strong>
+                  <strong class="category-item-title">{{ category.Eventtitle }}</strong>
                 </a>
               </div>
             
@@ -61,7 +61,7 @@
                         {% if product.product_image %}
                           <img class="img-fluid w-100" src="{{ product.product_image.url }}" alt="{{product.title}}">
                         {% else %}
-                          <img class="img-fluid w-100" src="{% static 'img/product-1.jpg' %}" alt="{{product.title}}">
+                          <img class="img-fluid w-100" src="{% static 'images/product-1.jpg' %}" alt="{{product.title}}">
                         {% endif %}
                       </a>
 
@@ -79,8 +79,8 @@
                         </ul>
                       </div>
                     </div>
-                    <h6> <a class="reset-anchor" href="detail.html">{{ product.title }}</a></h6>
-                    <p class="small text-muted">Rs {{product.price}}</p>
+                    <h6> <a class="reset-anchor" href="detail.html">{{ product.Eventtitle }}</a></h6>
+                    <p class="small text-muted">Rs {{product.amount}}</p>
                   </div>
                 </div>
 
@@ -103,7 +103,7 @@
                       <use xlink:href="#delivery-time-1"> </use>
                     </svg>
                     <div class="media-body text-left ml-3">
-                      <h6 class="text-uppercase mb-1">Free shipping</h6>
+                      <h6 class="text-uppercase mb-1">No Extra Cost</h6>
                       <p class="text-small mb-0 text-muted">Free shipping worlwide</p>
                     </div>
                   </div>
@@ -117,7 +117,7 @@
                     </svg>
                     <div class="media-body text-left ml-3">
                       <h6 class="text-uppercase mb-1">24 x 7 service</h6>
-                      <p class="text-small mb-0 text-muted">Free shipping </p>
+                      
                     </div>
                   </div>
                 </div>
@@ -130,7 +130,6 @@
                     </svg>
                     <div class="media-body text-left ml-3">
                       <h6 class="text-uppercase mb-1">Festival offer</h6>
-                      <p class="text-small mb-0 text-muted">Free shipping </p>
                     </div>
                   </div>
                 </div>

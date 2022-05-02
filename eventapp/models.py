@@ -1,3 +1,4 @@
+from pickle import TRUE
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -28,6 +29,7 @@ class EventDetails(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name="Detail Description")
     image = models.ImageField(upload_to='product', blank=True, null=True, verbose_name="Product Image")
     category = models.ForeignKey(EventCategory, verbose_name="Product Categoy", on_delete=models.CASCADE)
+    amount=models.IntegerField()
     is_active = models.BooleanField(verbose_name="Is Active?")
     is_featured = models.BooleanField(verbose_name="Is Featured?")
 

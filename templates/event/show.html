@@ -10,12 +10,11 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Product Title  </th>
-                <th>Product Slug</th>
+                <th>Event Title  </th>
                 <th>Category</th>
-                <th>Detail Description</th>
-                <th>Product Image</th>
-                <th>Product Price</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Amount</th>
                 <th colspan="2">Action</th>
                            
             </tr>
@@ -24,12 +23,12 @@
             {% for i in all %}
             <tr style="padding: 3px;">
                 <td>{{ i.id }}</td>
-                <td>{{ i.title}}</td>
-                <td>{{ i.slug}}</td>
+                <td>{{ i.Eventtitle}}</td>
+                <td>{{ i.description}}</td>
                 <td>{{ i.category}}</td>
-                <td>{{ i.detail_description }}</td>
+                <td>{{ i.amount }}</td>
                 <td>
-                    <img src="{{ i.product_image.url }}" style="height: 350px; width: 200px;"> </td>
+                    <img src="{{ i.image.url }}" style="height: 250px; width: 100px;"> </td>
                 <td>{{ i.price }}</td>
                 <td class="btn btn-light " ><a href="#"> Edit </a></td>
                 <td class="btn btn-light " ><a href="#"> Delete </a></td>
