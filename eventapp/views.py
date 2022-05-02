@@ -60,7 +60,7 @@ def add_to_cart(request):
     else:
         Cart(user=user, product=product).save()
     
-    return redirect('store:cart')
+    return redirect('login:cart')
 
 
 @login_required
@@ -94,7 +94,7 @@ def remove_cart(request, cart_id):
         c = get_object_or_404(Cart, id=cart_id)
         c.delete()
         messages.success(request, "Product removed from Cart.")
-    return redirect('store:cart')
+    return redirect('login:cart')
 
 
 @login_required
@@ -103,7 +103,7 @@ def plus_cart(request, cart_id):
         cp = get_object_or_404(Cart, id=cart_id)
         cp.quantity += 1
         cp.save()
-    return redirect('store:cart')
+    return redirect('login:cart')
 
 
 @login_required
@@ -115,11 +115,11 @@ def minus_cart(request, cart_id):
         else:
             cp.quantity -= 1
             cp.save()
-    return redirect('store:cart')
+    return redirect('login:cart')
 
 def all_categories(request):
     categories = EventCategory.objects.filter(is_active=True)
-    return render(request, 'store/categories.html', {'categories':categories})
+    return render(request, 'event/categories.html', {'categories':categories})
 
 
 def category_products(request, slug):
@@ -131,7 +131,7 @@ def category_products(request, slug):
         'products': products,
         'categories': categories,
     }
-    return render(request, 'store/category_products.html', context)
+    return render(request, 'event/category_products.html', context)
 
 
 def admin(request):
@@ -156,7 +156,7 @@ def addcat(request):
                     
         cat.save()
         print('success')
-        return redirect('store:addpro')
+        return redirect('login:addpro')
     ve=EventCategory.objects.all()
     return render(request,'event/addcat.html',{'ve':ve} )
 
@@ -168,7 +168,7 @@ def detail(request, slug):
         'related_products': related_products,
 
     }
-    return render(request, 'store/detail.html', context)
+    return render(request, 'event/detail.html', context)
 
 
 @login_required
@@ -193,9 +193,9 @@ def addpro(request):
                     product_image=product_image)  
         pro.save()
         print('success')
-        return redirect('store:showpage')
+        return redirect('login:showpage')
     we=EventCategory.objects.all()
-    return render(request,'./store/addpro.html',{'we':we} )
+    return render(request,'./event/addpro.html',{'we':we} )
 
 
 @login_required
@@ -203,13 +203,13 @@ def deleteproduct(request,pk):
     pro=EventDetails.objects.get(id=pk)
     pro.delete()  
     print("successfully deleted")
-    return redirect('store:showpage')
+    return redirect('login:showpage')
 
     
 @login_required
 def showpage(request):
     a=EventDetails.objects.all()
-    return render(request,'./store/showcat.html',{'all':a})
+    return render(request,'./event/showcat.html',{'all':a})
 
 def edit (request,pk): 
     cat=EventCategory.objects.get(id=pk)
