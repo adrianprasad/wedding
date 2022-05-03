@@ -7,9 +7,8 @@
         <div class="container">
           <div class="row mb-5">
             <div class="col-lg-6">
-              <!-- PRODUCT SLIDER-->
               <div class="row m-sm-0">
-                
+                <h1>Event Details</h1>
                 <div class="col-sm-12 order-1 order-sm-2">
                   <div class="owl-carousel product-slider" data-slider-id="1">
                     {% if product.product_image %}
@@ -47,9 +46,9 @@
                 </div>
 
                 <div class="col-sm-3 pl-sm-0">
-                  {% comment %} <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{% url 'store:add-to-cart' %}">Add to cart</a> {% endcomment %}
+                  {% comment %} <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{% url 'login:add-to-cart' %}">Add to cart</a> {% endcomment %}
                   
-                  <form action="{% url 'store:add-to-cart' %}">
+                  <form action="{% url 'login:add-to-cart' %}">
                     <input type="hidden" name="prod_id" value="{{product.id}}" id="product_id">
                     <button type="submit" class="btn btn-dark btn-lg btn-block h-100 d-flex align-items-center justify-content-center px-0">Add to Cart</button>
                   </form>
@@ -58,8 +57,7 @@
 
               </div>
               <ul class="list-unstyled small d-inline-block">
-                <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">SKU:</strong><span class="ml-2 text-muted">{{product.sku}}</span></li>
-                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Category:</strong><a class="reset-anchor ml-2" href="{% url 'store:category-products' product.category.slug %}">{{product.category}}</a></li>
+                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Category:</strong><a class="reset-anchor ml-2" href="{% url 'login:category-products' product.category.slug %}">{{product.category}}</a></li>
                 <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Tags:</strong><a class="reset-anchor ml-2" href="#">Innovation</a></li>
               </ul>
             </div>
@@ -126,7 +124,7 @@
                 <div class="col-lg-3 col-sm-6">
                   <div class="product text-center skel-loader">
                     <div class="d-block mb-3 position-relative">
-                      <a class="d-block" href="{% url 'store:product-detail' rp.slug %}">
+                      <a class="d-block" href="{% url 'login:product-detail' rp.slug %}">
                         {% if rp.product_image %}
                           <img class="img-fluid w-100" src="{{rp.product_image.url}}" alt="{{rp.title}}">
                         {% else %}
@@ -137,11 +135,11 @@
                       <div class="product-overlay">
                         <ul class="mb-0 list-inline">
                           
-                          <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{% url 'store:add-to-cart' %}">Add to cart</a></li>
+                          <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{% url 'login:add-to-cart' %}">Add to cart</a></li>
                         </ul>
                       </div>
                     </div>
-                    <h6> <a class="reset-anchor" href="{% url 'store:product-detail' rp.slug %}">{{rp.title}}</a></h6>
+                    <h6> <a class="reset-anchor" href="{% url 'login:product-detail' rp.slug %}">{{rp.title}}</a></h6>
                     <p class="small text-muted">Rs{{rp.price}}</p>
                   </div>
                 </div>

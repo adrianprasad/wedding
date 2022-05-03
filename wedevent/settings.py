@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'eventapp'
 ]
 
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'wedevent.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eventdata',
+        'NAME': 'eventnew',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
