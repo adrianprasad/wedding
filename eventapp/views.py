@@ -3,6 +3,7 @@ from django.shortcuts import render
 from unicodedata import category
 from django.contrib.auth import authenticate,login,logout
 import django
+from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User,auth
 from eventapp.models import Address, Cart, EventCategory, EventDetails,Order
 from django.shortcuts import redirect, render, get_object_or_404
@@ -54,15 +55,19 @@ def register(request):
 #         return render(request, 'login/register.html', {'form': form})
 
 def login(request):
-    form=LoginForm()
+    
     if request.method=='POST':
         form=LoginForm(request.POST)
+        
         if form.is_valid():
             uname = form.cleaned_data['username']
             password=form.cleaned_data['password']
-            user = auth.authenticate(username=uname, password=password)
-            auth.login(request,user)
-            login(request)
+            user=authenticate(username=uname, password=password)
+            if user is not None:
+                login(request,user)
+                return HttpResponseRedirect('login:home')
+    else:
+        form=LoginForm()       
     return render (request, 'login/login.html', {'form':form})
 
 @login_required
