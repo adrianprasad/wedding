@@ -74,7 +74,7 @@
                         </div>
                       </td>
                       <td class="align-middle border-0">
-                        <p class="mb-0 small">Rs{{cart_product.total_price|intcomma}}</p>
+                        <p class="mb-0 small">Rs{{cart_product.total_amount|intcomma}}</p>
                       </td>
                       <td class="align-middle border-0"><a class="reset-anchor" href="{% url 'login:remove-cart' cart_product.id %}"><i class="fas fa-trash-alt small text-muted"></i></a></td>
                     </tr>

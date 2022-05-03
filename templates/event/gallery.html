@@ -1,78 +1,171 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section id="gallery" class="gallery section">
-    <div class="container-fluid">
-      <div class="section-header">
-                  <h2 class="wow fadeInDown animated">Gallery</h2>
-                  <p class="wow fadeInDown animated">Event management is the application of project management to the creation and development of small and/or large-scale personal or corporate events such as festivals, conferences, <br>ceremonies, weddings, formal parties, concerts, or conventions. </p>
-              </div>
-      <div class="row no-gutter">
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="{% static 'images/portfolio/01.jpg' %}" class="work-box"> <img src="{% static 'images/portfolio/01.jpg' %}" alt="">
-          <div class="overlay">
-            <div class="overlay-caption">
-               <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="{% static 'images/portfolio/02.jpg' %}" class="work-box"> <img src="{% static 'images/portfolio/mjn1lcou1cw-1024x683.jpg' %}" alt="">
-          <div class="overlay">
-            <div class="overlay-caption">
-              <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="{% static 'images/portfolio/baptism.jpg' %}" class="work-box"> <img src="{% static 'images/portfolio/Wedding-Planners-in-Kolkata-1024x538.jpg' %}" alt="">
-          <div class="overlay">
-            <div class="overlay-caption">
-              <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="{% static 'images/portfolio/04.jpg' %}" class="work-box"> <img src="images/portfolio/04.jpg" alt="">
-          <div class="overlay">
-            <div class="overlay-caption"> 
-              <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="{% static 'images/portfolio/05.jpg' %}" class="work-box"> <img src="{% static 'images/portfolio/05.jpg' %}" alt="">
-          <div class="overlay">
-            <div class="overlay-caption">
-              <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/portfolio/06.jpg" class="work-box"> <img src="{% static 'images/portfolio/06.jpg' %}" alt="">
-          <div class="overlay">
-            <div class="overlay-caption">
-              <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="{% static 'images/portfolio/07.jpg' %}" class="work-box"> <img src="{% static 'images/portfolio/07.jpg' %}" alt="">
-          <div class="overlay">
-            <div class="overlay-caption">
-              <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="{% static 'images/portfolio/08.jpg' %}" class="work-box"> <img src="{% static 'images/portfolio/08.jpg' %}" alt="">
-          <div class="overlay">
-            <div class="overlay-caption">
-               <p><span class="icon icon-magnifying-glass"></span></p>
-            </div>
-          </div>
-          <!-- overlay --> 
-          </a> </div>
-      </div>
+<div class="container px-0 py-4">
+  <div class="pp-category-filter">
+    <div class="row">
+      <div class="col-sm-12"><a class="btn btn-primary pp-filter-button" href="#" data-filter="all">All</a><a class="btn btn-outline-primary pp-filter-button" href="#" data-filter="people">People</a><a class="btn btn-outline-primary pp-filter-button" href="#" data-filter="nature">Nature</a><a class="btn btn-outline-primary pp-filter-button" href="#" data-filter="computer">Computer</a><a class="btn btn-outline-primary pp-filter-button" href="#" data-filter="food">Food</a></div>
     </div>
-  </section>
+  </div>
+</div>
+<div class="container px-0">
+  <div class="pp-gallery">
+    <div class="card-columns">
+      <div class="card" data-groups="[&quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="{% static 'images/1-nature.jpg' %}" alt="Nature"/>
+            <figcaption>
+              <div class="h4">Forest</div>
+              <p>Nature</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/2-nature.jpg" alt="Nature"/>
+            <figcaption>
+              <div class="h4">Bird</div>
+              <p>Nature</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/4-nature.jpg" alt="Nature"/>
+            <figcaption>
+              <div class="h4">Sunrise</div>
+              <p>Nature</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/5-nature.jpg" alt="Nature"/>
+            <figcaption>
+              <div class="h4">Greenery</div>
+              <p>Nature</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/8-nature.jpg" alt="Nature"/>
+            <figcaption>
+              <div class="h4">Bird</div>
+              <p>Nature</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/9-nature.jpg" alt="Nature"/>
+            <figcaption>
+              <div class="h4">Flower</div>
+              <p>Nature</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;people&quot; , &quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/10-people.jpg" alt="People"/>
+            <figcaption>
+              <div class="h4">Model</div>
+              <p>People</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;people&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/11-people.jpg" alt="People"/>
+            <figcaption>
+              <div class="h4">Cute</div>
+              <p>People</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;people&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/13-people.jpg" alt="People"/>
+            <figcaption>
+              <div class="h4">Model</div>
+              <p>People</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;people&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/14-people.jpg" alt="People"/>
+            <figcaption>
+              <div class="h4">Model</div>
+              <p>People</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;people&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/16-people.jpg" alt="People"/>
+            <figcaption>
+              <div class="h4">Model</div>
+              <p>People</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;people&quot; , &quot;nature&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/17-people.jpg" alt="People"/>
+            <figcaption>
+              <div class="h4">Model</div>
+              <p>People</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;computer&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/18-computer.jpg" alt="Computer"/>
+            <figcaption>
+              <div class="h4">Laptop</div>
+              <p>Computer</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;computer&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/19-computer.jpg" alt="Computer"/>
+            <figcaption>
+              <div class="h4">Laptop</div>
+              <p>Computer</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;computer&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/20-computer.jpg" alt="Computer"/>
+            <figcaption>
+              <div class="h4">Laptop</div>
+              <p>Computer</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;computer&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/23-computer.jpg" alt="Computer"/>
+            <figcaption>
+              <div class="h4">Laptop</div>
+              <p>Computer</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;computer&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/24-computer.jpg" alt="Computer"/>
+            <figcaption>
+              <div class="h4">Laptop</div>
+              <p>Computer</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;food&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/26-food.jpg" alt="Food"/>
+            <figcaption>
+              <div class="h4">Fruit Salad</div>
+              <p>Food</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;food&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/27-food.jpg" alt="Food"/>
+            <figcaption>
+              <div class="h4">Oranges</div>
+              <p>Food</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;food&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/28-food.jpg" alt="Food"/>
+            <figcaption>
+              <div class="h4">Lemon Tea</div>
+              <p>Food</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;food&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/29-food.jpg" alt="Food"/>
+            <figcaption>
+              <div class="h4">Pasta</div>
+              <p>Food</p>
+            </figcaption>
+          </figure></a></div>
+      <div class="card" data-groups="[&quot;food&quot;]"><a href="image-detail.html">
+          <figure class="pp-effect"><img class="img-fluid" src="images/30-food.jpg" alt="Food"/>
+            <figcaption>
+              <div class="h4">Burger</div>
+              <p>Food</p>
+            </figcaption>
+          </figure></a></div>
+    </div>
+  </div>
+</div>
   {% endblock content %}

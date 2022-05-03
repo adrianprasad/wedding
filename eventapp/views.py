@@ -32,48 +32,76 @@ def gallery(request):
 def contact(request):
     return render(request,'./event/contact.html')
 
-def register(request):
-    form=RegistrationForm()
-    if request.method=='POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            messages.success(request, "Congratulations! Registration Successful!")
-            form.save()
-            return redirect('login:login')
-    return render(request,'login/register.html', {'form': form})
-
-# class RegistrationView(View):
-#     def get(self, request):
-#         form = RegistrationForm()
-#         return render(request, 'login/register.html', {'form': form})
-    
-#     def post(self, request):
+# def register(request):
+#     form=RegistrationForm()
+#     if request.method=='POST':
 #         form = RegistrationForm(request.POST)
 #         if form.is_valid():
 #             messages.success(request, "Congratulations! Registration Successful!")
 #             form.save()
-#         return render(request, 'login/register.html', {'form': form})
+#             return redirect('login:login')
+#     return render(request,'login/register.html', {'form': form})
 
-def login(request):
+
+
+# def login(request):
     
-    if request.method=='POST':
-        form=LoginForm(request.POST)
+#     if request.method=='POST':
+#         form=LoginForm(request.POST)
         
+#         if form.is_valid():
+#             uname = form.cleaned_data['username']
+#             password=form.cleaned_data['password']
+#             user=authenticate(username=uname, password=password)
+#             if user is not None:
+#                 login(request,user)
+#                 return HttpResponseRedirect('login:home')
+#     else:
+#         form=LoginForm()       
+#     return render (request, 'login/login.html', {'form':form})
+
+class RegistrationView(View):
+    def get(self, request):
+        form = RegistrationForm()
+        return render(request, 'login/register.html', {'form': form})
+    
+    def post(self, request):
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            uname = form.cleaned_data['username']
-            password=form.cleaned_data['password']
-            user=authenticate(username=uname, password=password)
-            if user is not None:
-                login(request,user)
-                return HttpResponseRedirect('login:home')
-    else:
-        form=LoginForm()       
-    return render (request, 'login/login.html', {'form':form})
+            messages.success(request, "Congratulations! Registration Successful!")
+            form.save()
+        return render(request, 'login/register.html', {'form': form})
+
+
 
 @login_required
 def profile(request):
-    addresses = Address.objects.filter(user=request.user)
-    return render(request, 'login/profile.html',{'addresses':addresses})
+    addresses = Address.objects.filter(Name=request.user)
+    return render(request, 'admin/profile.html',{'addresses':addresses})
+
+@method_decorator(login_required, name='dispatch')
+class AddressView(View):
+    def get(self, request):
+        form = AddressForm()
+        return render(request, 'account/add_address.html', {'form': form})
+
+    def post(self, request):
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            Name=request.user
+            city = form.cleaned_data['city']
+            state = form.cleaned_data['state']
+            reg = Address(Name=Name, city=city, state=state)
+            reg.save()
+            messages.success(request, "New Address Added Successfully.")
+        return redirect('store:profile')
+
+@login_required
+def remove_address(request, id):
+    a = get_object_or_404(Address, user=request.user, id=id)
+    a.delete()
+    messages.success(request, "Address removed.")
+    return redirect('store:profile')
 
 
 @login_required
@@ -171,8 +199,7 @@ def orders(request):
 
 
 
-def admin(request):
-    return render(request,'admin.html')
+
 
 @login_required
 def addcat(request):
@@ -219,7 +246,7 @@ def addevent(request):
         detail_description=request.POST['detail_description']
         is_active=request.POST['is_active']
         is_featured=request.POST['is_featured']
-        product_image = request.FILES['file']
+        image = request.FILES['file']
         pro=EventDetails(Eventtitle=Eventtitle,
                     slug=slug,
                     amount=amount,
@@ -227,7 +254,7 @@ def addevent(request):
                     description=detail_description,
                     is_active=True,
                     is_featured=True,
-                    product_image=product_image)  
+                    image=image)  
         pro.save()
         print('success')
         return redirect('login:showpage')
@@ -248,7 +275,7 @@ def remove_cart(request, cart_id):
         c = get_object_or_404(Cart, id=cart_id)
         c.delete()
         messages.success(request, "Product removed from Cart.")
-    return redirect('store:cart')
+    return redirect('login:cart')
 
 
 @login_required
@@ -285,10 +312,10 @@ def edit (request,pk):
 def edit_pro(request,pk):
     if request.method=='POST':
         prod=EventDetails.objects.get(id=pk)
-        prod.title = request.POST.get('title')
+        prod.Eventtitle = request.POST.get('title')
         prod.slug = request.POST.get('slug')
-        prod.detail_description=request.POST.get('age')
-        prod.product_image = request.POST.get('Tname')
+        prod.description=request.POST.get('age')
+        prod.image = request.POST.get('Tname')
         prod.price = request.POST.get('price')
         prod.save() 
         print("successfully updated")
