@@ -10,12 +10,44 @@
             <a href="{% url 'login:addcat' %}">Add Event Category</a>
           </div>
           <div class="btn">
-            <a href="{% url 'login:addpro' %}">Add Event Details</a>
+            <a href="{% url 'login:addevent' %}">Add Event Details</a>
           </div>
           <div class="btn">
             <a href="{% url 'login:showpage' %}">Show Details</a>
           </div>
-
+          <div class="table-responsive table table-striped">
+            <table  class="table">
+        
+         <h1 style="font-family: 'Courier New', Courier, monospace; text-align: center;">Events</h1> 
+        <div class="table-responsive table table-striped">
+            
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Event Title  </th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Image</th>
+                        <th colspan="2">Action</th>
+                                   
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in all %}
+                    <tr style="padding: 3px;">
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.Eventtitle}}</td>
+                        <td>{{ i.description}}</td>
+                        <td>{{ i.category}}</td>
+                        <td>{{ i.amount }}</td>
+                        <td>
+                            <img src="{{ i.image.url }}" style="height: 150px; width: 400px;"> </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% else %}
 
         {% include 'admin/messages.html' %}
@@ -24,7 +56,7 @@
           <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
           <p><strong>Email:</strong> {{request.user.email}}</p>
           <p><strong>Username:</strong> {{request.user.username}}</p>
-          <p><a class="btn btn-primary btn-large" href="{% url 'login:add-address' %}">Add Address »</a> <a class="btn btn-outline-primary btn-large" href="#">My Bookings »</a></p>
+          <p><a class="btn btn-primary btn-large" href="{% url 'login:add-address' %}">Add Address »</a> </p>
         </div>
 
 

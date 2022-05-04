@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Address, EventCategory, EventDetails, Cart, Order
+from .models import Address, EventCategory, EventDetails, Cart, Order,Booking
 
 # Register your models here.
 class AddressAdmin(admin.ModelAdmin):
@@ -35,15 +35,22 @@ class CartAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product', 'quantity', 'status', 'ordered_date')
-    list_editable = ('quantity', 'status')
+    list_display = ('user', 'product', 'status', 'ordered_date')
+    list_editable = ('product', 'status')
     list_filter = ('status', 'ordered_date')
     list_per_page = 20
     search_fields = ('user', 'product')
 
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('user', 'Eventtitle', 'Description', 'ordered_date')
+    list_editable = ()
+    list_filter = ( )
+    list_per_page = 20
+    search_fields = ('user', 'product')
 
 admin.site.register(Address, AddressAdmin)
 admin.site.register(EventCategory, EventCategoryAdmin)
 admin.site.register(EventDetails, EventDetailsAdmin)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Booking, BookingAdmin)

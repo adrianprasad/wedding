@@ -3,8 +3,7 @@ from django.shortcuts import render
 from unicodedata import category
 from django.contrib.auth import authenticate,login,logout
 import django
-from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User
 from eventapp.models import Address, Cart, EventCategory, EventDetails,Order
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import RegistrationForm, AddressForm,LoginForm
@@ -77,13 +76,14 @@ class RegistrationView(View):
 @login_required
 def profile(request):
     addresses = Address.objects.filter(Name=request.user)
-    return render(request, 'admin/profile.html',{'addresses':addresses})
+    a=EventDetails.objects.all()
+    return render(request, 'admin/profile.html',{'addresses':addresses,'all':a})
 
 @method_decorator(login_required, name='dispatch')
 class AddressView(View):
     def get(self, request):
         form = AddressForm()
-        return render(request, 'account/add_address.html', {'form': form})
+        return render(request, 'admin/add_address.html', {'form': form})
 
     def post(self, request):
         form = AddressForm(request.POST)
@@ -94,19 +94,20 @@ class AddressView(View):
             reg = Address(Name=Name, city=city, state=state)
             reg.save()
             messages.success(request, "New Address Added Successfully.")
-        return redirect('store:profile')
+        return redirect('login:profile')
 
 @login_required
 def remove_address(request, id):
     a = get_object_or_404(Address, user=request.user, id=id)
     a.delete()
     messages.success(request, "Address removed.")
-    return redirect('store:profile')
+    return redirect('login:profile')
 
 
 @login_required
-def logoutpage(request):
+def logout_view(request):
     logout (request)
+    return redirect('login:home')
 
 @login_required
 def add_to_cart(request):
@@ -169,33 +170,19 @@ def category_products(request, slug):
     category = get_object_or_404(EventCategory, slug=slug)
     products = EventDetails.objects.filter(is_active=True, category=category)
     categories = EventCategory.objects.filter(is_active=True)
-    context = {
-        'category': category,
-        'products': products,
-        'categories': categories,
-    }
+    context = {'category': category,'products': products,'categories': categories,}
     return render(request, 'event/category_products.html', context)
 
 @login_required
-def checkout(request):
-    user = request.user
-    address_id = request.GET.get('address')
-    
-    address = get_object_or_404(Address, id=address_id)
-    # Get all the products of User in Cart
-    cart = Cart.objects.filter(user=user)
-    for c in cart:
-        # Saving all the products from Cart to Order
-        Order(user=user, address=address, product=c.product, quantity=c.quantity).save()
-        # And Deleting from Cart
-        c.delete()
-    return redirect('store:orders')
+def checkout(request,pk):
+    a=EventDetails.objects.get(id=pk)
+    return render(request,'show.html',{'a':a})
 
 
 @login_required
 def orders(request):
     all_orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
-    return render(request, 'store/orders.html', {'orders': all_orders})
+    return render(request, 'event/orders.html', {'orders': all_orders})
 
 
 
@@ -220,9 +207,10 @@ def addcat(request):
                     
         cat.save()
         print('success')
-        return redirect('login:addpro')
+        return redirect('login:addevent')
     ve=EventCategory.objects.all()
-    return render(request,'event/addcat.html',{'ve':ve} )
+    return render(request,'event/addcategory.html',{'ve':ve} )
+
 
 def details(request, slug):
     product = get_object_or_404(EventDetails, slug=slug)
@@ -243,7 +231,7 @@ def addevent(request):
         amount=request.POST['amount']
         category=request.POST['category']
         category=EventCategory.objects.get(id=category)
-        detail_description=request.POST['detail_description']
+        description=request.POST['description']
         is_active=request.POST['is_active']
         is_featured=request.POST['is_featured']
         image = request.FILES['file']
@@ -251,7 +239,7 @@ def addevent(request):
                     slug=slug,
                     amount=amount,
                     category=category,
-                    description=detail_description,
+                    description=description,
                     is_active=True,
                     is_featured=True,
                     image=image)  
@@ -284,7 +272,7 @@ def plus_cart(request, cart_id):
         cp = get_object_or_404(Cart, id=cart_id)
         cp.quantity += 1
         cp.save()
-    return redirect('store:cart')
+    return redirect('login:cart')
 
 
 @login_required
@@ -297,27 +285,64 @@ def minus_cart(request, cart_id):
         else:
             cp.quantity -= 1
             cp.save()
-    return redirect('store:cart')
+    return redirect('login:cart')
     
 @login_required
 def showpage(request):
     a=EventDetails.objects.all()
-    return render(request,'./event/showcat.html',{'all':a})
+    return render(request,'event/show.html',{'all':a})
 
+
+@login_required
 def edit (request,pk): 
     cat=EventCategory.objects.get(id=pk)
     pro=EventDetails.objects.get(id=pk)
-    return render(request, 'edit.html', {'stud': cat,'std':pro})
+    return render(request, 'edit/edit.html', {'stud': cat,'std':pro})
 
-def edit_pro(request,pk):
+# def edit_pro(request,pk):
+#     if request.method=='POST':
+#         prod=EventDetails.objects.get(id=pk)
+#         prod.Eventtitle = request.POST.get('title')
+#         prod.slug = request.POST.get('slug')
+#         prod.description=request.POST.get('age')
+#         prod.image = request.POST.get('Tname')
+#         prod.price = request.POST.get('price')
+#         prod.save() 
+#         print("successfully updated")
+#         return redirect('showpage')
+#     return render(request,'showcat.html',)
+
+@login_required
+def edit(request,pk):
+    
     if request.method=='POST':
-        prod=EventDetails.objects.get(id=pk)
-        prod.Eventtitle = request.POST.get('title')
-        prod.slug = request.POST.get('slug')
-        prod.description=request.POST.get('age')
-        prod.image = request.POST.get('Tname')
-        prod.price = request.POST.get('price')
-        prod.save() 
+        event=EventDetails.objects.get(id=pk)
+        event.Eventtitle = request.POST.get('title')
+        event.slug = request.POST.get('slug')
+        event.description = request.POST.get('description')
+        event.image = request.POST.get('file')
+        event.category = request.POST.get('category')
+        event.amount = request.POST.get('amount')
+        event.is_active = request.POST.get('is_active')
+        event.is_featured = request.POST.get('is_featured')
+        event.save() 
         print("successfully updated")
         return redirect('showpage')
-    return render(request,'showcat.html',)
+    return render(request,'edit/edit.html',)
+
+@login_required
+def delete(request,pk):
+    form=EventDetails.objects.get(id=pk)
+    form.delete()
+    return redirect('login:showpage')
+
+@login_required
+def bookings(request):
+    a=EventDetails.objects.all()
+    user=User.objects.all()
+    return render(request,'event/booking.html',{'all':a,'a':user})
+
+@login_required
+def orders(request):
+    all_orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
+    return render(request, 'event/orders.html', {'orders': all_orders})

@@ -78,7 +78,6 @@ class Order(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
     address = models.ForeignKey(Address, verbose_name="Shipping Address", on_delete=models.CASCADE)
     product = models.ForeignKey(EventDetails, verbose_name="Product", on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(verbose_name="Quantity")
     ordered_date = models.DateTimeField(auto_now_add=True, verbose_name="Ordered Date")
     status = models.CharField(
         choices=STATUS_CHOICES,
@@ -86,3 +85,13 @@ class Order(models.Model):
         default="Pending"
         )
 
+class Booking(models.Model):
+    user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
+    Eventtitle = models.ForeignKey(Address, verbose_name="Event", on_delete=models.CASCADE)
+    Description = models.ForeignKey(EventDetails, verbose_name="Descrption", on_delete=models.CASCADE)
+    ordered_date = models.DateTimeField(auto_now_add=True, verbose_name="Ordered Date")
+
+
+
+    def __str__(self):
+        return self.Event

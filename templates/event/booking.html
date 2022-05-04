@@ -4,33 +4,30 @@
 <div class="table-responsive table table-striped">
     <table  class="table">
 
- Events  
+ <h1>Bookings</h1>  
 <div class="table-responsive table table-striped">
     
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Username</th>
                 <th>Event Title  </th>
                 <th>Category</th>
-                <th>Description</th>
+       
                 <th>Amount</th>
-                <th>Image</th>
-                <th colspan="2">Action</th>
+                
+
                            
             </tr>
         </thead>
         <tbody>
             {% for i in all %}
             <tr style="padding: 3px;">
-                <td>{{ i.id }}</td>
+                <td>{{ i.id }}</td>     
+                <td>{{ i.User}}</td>
                 <td>{{ i.Eventtitle}}</td>
-                <td>{{ i.description}}</td>
                 <td>{{ i.category}}</td>
                 <td>{{ i.amount }}</td>
-                <td>
-                    <img src="{{ i.image.url }}" style="height: 150px; width: 400px;"> </td>
-                <td class="btn btn-light " ><a href="{% url 'login:edit' i.id %}"> Edit </a></td>
-                <td class="btn btn-light " ><a href="{% url 'login:delete' i.id %}"> Delete </a></td>
             </tr>
             {% endfor %}
         </tbody>

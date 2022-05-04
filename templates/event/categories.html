@@ -16,11 +16,11 @@
               <div class="col-md-4 mb-4 mb-md-5">
                 <a class="category-item" href="{% url 'login:category-products' category.slug  %}">
                   {% if category.category_image %}
-                    <img class="img-fluid" src="{{ category.category_image.url }}" alt="{{ category.title }}">
+                    <img class="img-fluid" src="{{ category.category_image.url }}" alt="{{ category.Eventtitle }}">
                     {% else %}
-                    <img class="img-fluid" src="{% static 'images/cat-img-1.jpg' %}" alt="{{ category.title }}">
+                    <img class="img-fluid" src="{% static 'images/cat-img-1.jpg' %}" alt="{{ category.Eventtitle }}">
                   {% endif %}
-                  <strong class="category-item-title">{{ category.title }}</strong>
+                  <strong class="category-item-title">{{ category.Eventtitle }}</strong>
                 </a>
               </div>
             

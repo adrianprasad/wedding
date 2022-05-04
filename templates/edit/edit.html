@@ -2,32 +2,32 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <h1>Add Product</h1>
-<form method="post" action="{% url 'login:addevent' %}" enctype="multipart/form-data" style="width:30%; " >
+    <h1>Edit Details</h1>
+<form method="post" action="/edit_details/{{event.pk}}" enctype="multipart/form-data" style="width:30%; " >
     {% csrf_token %}
     <div class="form-group">
         <label>Event Title</label>
-        <input type="text" name="title" class="form-control" placeholder="Category Title" required>
+        <input type="text" name="title" class="form-control" placeholder="Category Title" value="{{event.title}}" required>
     </div>
     <br>
     <div class="form-group">
         <label>Event Slug</label>
-        <input type="text" name="slug" class="form-control" placeholder=" List" required>
+        <input type="text" name="slug" class="form-control" placeholder=" slug" value="{{event.slug}}" required>
     </div>
     <br>
     <div class="form-group">
         <label> Description</label>
-        <input type="text" name="description" class="form-control" placeholder=" List" required>
+        <input type="text" name="description" class="form-control" placeholder=" description" value="{{event.description}}" required>
     </div>
     <br>
     <div class="form-group">
         <label>Amount</label>
-        <input type="number" name="amount" class="form-control" Price=" List" required>
+        <input type="number" name="amount" class="form-control"  value="{{event.amount}}" required>
     </div>
     <br>
     <div class="form-group">
         <label>Category</label>
-        <select name="category" class="form-control">
+        <select name="category" class="form-control" value="{{event.category}}">
             {% for i in we %}
             <option value="{{ i.id }}">
                 {{ i.categorytitle }}
@@ -38,16 +38,16 @@
     <br>
     <div class="form-group">
         <label>Image</label>
-        <input type="file" class="form-control" name="file"  required>
+        <input type="file" class="form-control" value="{{event.image}}" name="file"  required>
     </div>
     <div class="form-group">
         <label>Is Active </label>
-        <input type="checkbox" class="form-control" name="is_active"  checked>
+        <input type="checkbox" class="form-control" value="{{event.is_active}}" name="is_active"  checked>
     </div>
     <br>
     <div class="form-group">
         <label>Is Featured </label>
-        <input type="checkbox" class="form-control" name="is_featured"  checked>
+        <input type="checkbox" class="form-control" value="{{event.is_featured}}" name="is_featured"  checked>
     </div>
     <br>
    
@@ -55,6 +55,7 @@
         <button type="submit" class="btn btn-outline-success">submit</button>
     </div>
     <br>
+    <input type="button" value="Previous Page" onClick="javascript:history.go(-1);">
 </form>
 </div>
 {% endblock content %}

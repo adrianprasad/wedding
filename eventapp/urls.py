@@ -1,6 +1,5 @@
 from django.urls import path
-from eventapp.forms import LoginForm, PasswordChangeForm, SetPasswordForm
-
+from eventapp.forms import LoginForm
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -22,17 +21,15 @@ urlpatterns = [
     path('event/contact/', views.contact, name="contact"),
     path('<slug:slug>/', views.category_products, name="category-products"),
     path('showpage',views.showpage,name='showpage'),
-    #path('register',views.register,name='register'),
-    #path('/login',views.login,name='login'),
+    path('bookings<',views.bookings,name='bookings'),
     path('accounts/profile/', views.profile, name="profile"),
     path('accounts/register/', views.RegistrationView.as_view(), name="register"),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login/login.html', authentication_form=LoginForm), name="login"),
     path('accounts/add-address/', views.AddressView.as_view(), name="add-address"),
     path('accounts/remove-address/<int:id>/', views.remove_address, name="remove-address"),
-    path('logoutpage/', views.logoutpage, name="logoutpage"),
+    path('accounts/logout_view/', views.logout_view, name="logout_view"),
     path('addcat',views.addcat,name='addcat'),
     path('/addevent/',views.addevent,name='addevent'),
-    path('/deleteproduct//<int:pk/',views.deleteproduct,name='deleteproduct'),
-    path('edit/<int:pk/',views.edit,name='edit'),
-    path('edit_pro/<int:pk/',views.edit_pro,name='edit_pro'),
+    path('delete/<int:pk>', views.delete,name='delete'),
+    path('edit/<int:pk>',views.edit,name='edit'),
 ]
