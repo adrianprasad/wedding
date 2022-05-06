@@ -3,7 +3,7 @@ from .models import Address, EventCategory, EventDetails, Cart, Order,Booking
 
 # Register your models here.
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ('Name', 'locality', 'city', 'state')
+    list_display = ('user', 'locality', 'city', 'state')
     list_filter = ('city', 'state')
     list_per_page = 10
     search_fields = ('locality', 'city', 'state')
@@ -42,12 +42,8 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('user', 'product')
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'Eventtitle', 'Description', 'ordered_date')
-    list_editable = ()
-    list_filter = ( )
-    list_per_page = 20
-    search_fields = ('user', 'product')
-
+    list_display = ('user', 'Eventtitle', 'Description', 'booked_date')
+    
 admin.site.register(Address, AddressAdmin)
 admin.site.register(EventCategory, EventCategoryAdmin)
 admin.site.register(EventDetails, EventDetailsAdmin)

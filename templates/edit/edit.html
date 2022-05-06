@@ -7,7 +7,7 @@
     {% csrf_token %}
     <div class="form-group">
         <label>Event Title</label>
-        <input type="text" name="title" class="form-control" placeholder="Category Title" value="{{event.title}}" required>
+        <input type="text" name="title" class="form-control" placeholder="Category Title" value="{{event.Eventtitle}}" required>
     </div>
     <br>
     <div class="form-group">
@@ -28,7 +28,7 @@
     <div class="form-group">
         <label>Category</label>
         <select name="category" class="form-control" value="{{event.category}}">
-            {% for i in stud %}
+            {% for i in cat %}
             <option value="{{ i.id }}">
                 {{ i.categorytitle }}
             </option>

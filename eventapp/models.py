@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Address(models.Model):
-    Name = models.ForeignKey(User, verbose_name="Name", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name="Name", on_delete=models.CASCADE)
     locality = models.CharField(max_length=150, verbose_name="Nearest Location")
     city = models.CharField(max_length=150, verbose_name="City")
     state = models.CharField(max_length=150, verbose_name="State")
@@ -89,9 +89,10 @@ class Booking(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
     Eventtitle = models.ForeignKey(Address, verbose_name="Event", on_delete=models.CASCADE)
     Description = models.ForeignKey(EventDetails, verbose_name="Descrption", on_delete=models.CASCADE)
-    ordered_date = models.DateTimeField(auto_now_add=True, verbose_name="Ordered Date")
+    booked_date = models.DateTimeField(auto_now_add=True, verbose_name="Ordered Date")
 
-
+    class Meta:
+        verbose_name_plural = 'Products'
 
     def __str__(self):
-        return self.Event
+        return self.user
