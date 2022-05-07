@@ -4,7 +4,7 @@ from unicodedata import category
 from django.contrib.auth import authenticate,login,logout
 import django
 from django.contrib.auth.models import User
-from eventapp.models import Address, Cart, EventCategory, EventDetails,Order,Booking
+from eventapp.models import Address, Cart, EventCategory, EventDetails
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import RegistrationForm, AddressForm,LoginForm
 from django.contrib import messages
@@ -173,23 +173,10 @@ def category_products(request, slug):
     context = {'category': category,'products': products,'categories': categories,}
     return render(request, 'event/category_products.html', context)
 
-@login_required
-def checkout(request):
-    user = request.user
-    address_id = request.GET.get('address')
+# @login_required
+# def checkout(request):
     
-    address = get_object_or_404(Address, id=address_id)
-    cart = Cart.objects.filter(user=user)
-    for c in cart:
-        Order(user=user, address=address, product=c.product, quantity=c.quantity).save()
-        c.delete()
-    return redirect('login:orders')
-
-
-@login_required
-def orders(request):
-    all_orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
-    return render(request, 'event/order.html', {'orders': all_orders})
+#     return render(request,'event/cart.html')
 
 
 
@@ -345,11 +332,9 @@ def delete(request,pk):
 
 @login_required
 def bookings(request):
-    a=EventDetails.objects.filter(id=a)
-    user=User.objects.filter(id=request.user,)
-    return render(request,'event/booking.html',{'all':a,'a':user})
+    cart=Cart.objects.all()
 
-@login_required
-def orders(request):
-    all_orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
-    return render(request, 'event/orders.html', {'orders': all_orders})
+    return render (request,'event/booking.html',{'cart':cart})
+        
+    
+

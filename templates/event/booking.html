@@ -12,22 +12,22 @@
                 <th>ID</th>
                 <th>Username</th>
                 <th>Event Title  </th>
-                <th>Category</th>
+                <th>User Id</th>
        
-                <th>Amount</th>
+                <th>Booking Date</th>
                 
 
                            
             </tr>
         </thead>
         <tbody>
-            {% for i in all %}
+            {% for i in cart %}
             <tr style="padding: 3px;">
                 <td>{{ i.id }}</td>     
                 <td>{{ i.user.username }}</td>
-                <td>{{ i.Eventtitle}}</td>
-                <td>{{ i.category}}</td>
-                <td>{{ i.amount }}</td>
+                <td>{{ i.product.Eventtitle }}</td>
+                <td>{{ i.user.id }}</td>
+                <td>{{ i.created_at }}</td>
             </tr>
             {% endfor %}
         </tbody>
