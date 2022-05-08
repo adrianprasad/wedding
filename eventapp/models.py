@@ -65,25 +65,7 @@ class Cart(models.Model):
     def total_price(self):
         return self.quantity * self.product.price
 
-STATUS_CHOICES = (
-    ('Pending', 'Pending'),
-    ('Accepted', 'Accepted'),
-    ('Packed', 'Packed'),
-    ('On The Way', 'On The Way'),
-    ('Delivered', 'Delivered'),
-    ('Cancelled', 'Cancelled')
-)
 
-# class Order(models.Model):
-#     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
-#     address = models.ForeignKey(Address, verbose_name="Shipping Address", on_delete=models.CASCADE)
-#     product = models.ForeignKey(EventDetails, verbose_name="Product", on_delete=models.CASCADE)
-#     ordered_date = models.DateTimeField(auto_now_add=True, verbose_name="Ordered Date")
-#     status = models.CharField(
-#         choices=STATUS_CHOICES,
-#         max_length=50,
-#         default="Pending"
-#         )
 
 class Booking(models.Model):
     user = models.ForeignKey(User, default=1,verbose_name="User", on_delete=models.CASCADE)

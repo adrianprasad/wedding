@@ -7,7 +7,7 @@
             <div class="row px-4 px-lg-5">
               <div class="col-lg-6">
                 <p class="text-muted small text-uppercase mb-2">Wedding Events </p>
-                <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="{% url 'login:all-categories' %}">Browse All Events</a>
+                <h1 class="h2 text-uppercase mb-3">20% Discount on Early Booking</h1><a class="btn btn-dark" href="{% url 'login:all-categories' %}">Browse All Events</a>
               </div>
             </div>
           </div>
@@ -68,11 +68,11 @@
                         <ul class="mb-0 list-inline">
                           
                           <li class="list-inline-item m-0 p-0">
-                            {% comment %} <a class="btn btn-sm btn-dark" href="{% url 'login:add-to-cart' %}">Add to cart</a> {% endcomment %}
+                            {% comment %} <a class="btn btn-sm btn-dark" href="{% url 'login:add-to-cart' %}">Book Now</a> {% endcomment %}
 
                             <form action="{% url 'login:add-to-cart' %}">
                               <input type="hidden" name="prod_id" value="{{product.id}}" id="product_id">
-                              <button type="submit" class="btn btn-sm btn-dark">Add to Cart</button>
+                              <button type="submit" class="btn btn-sm btn-dark">Book Now</button>
                             </form>
                           </li>
                         </ul>

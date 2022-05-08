@@ -1,7 +1,6 @@
 from django.forms import IntegerField
 from django.shortcuts import render
-from unicodedata import category
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import logout
 import django
 from django.contrib.auth.models import User
 from eventapp.models import Address, Cart, EventCategory, EventDetails
@@ -16,49 +15,26 @@ from django.utils.decorators import method_decorator
 
 
 # Create your views here.
+#home
 def home(request):
     categories = EventCategory.objects.filter(is_active=True, is_featured=True)[:3]
     products = EventDetails.objects.filter(is_active=True, is_featured=True)[:8]
     context = {'categories': categories,'products': products,}
     return render(request,'./event/index.html',context)
 
+#About
 def about(request):
     return render(request,'./event/about.html')
 
+#Gallery
 def gallery(request):
     return render(request,'./event/gallery.html')
 
+#Contact
 def contact(request):
     return render(request,'./event/contact.html')
 
-# def register(request):
-#     form=RegistrationForm()
-#     if request.method=='POST':
-#         form = RegistrationForm(request.POST)
-#         if form.is_valid():
-#             messages.success(request, "Congratulations! Registration Successful!")
-#             form.save()
-#             return redirect('login:login')
-#     return render(request,'login/register.html', {'form': form})
-
-
-
-# def login(request):
-    
-#     if request.method=='POST':
-#         form=LoginForm(request.POST)
-        
-#         if form.is_valid():
-#             uname = form.cleaned_data['username']
-#             password=form.cleaned_data['password']
-#             user=authenticate(username=uname, password=password)
-#             if user is not None:
-#                 login(request,user)
-#                 return HttpResponseRedirect('login:home')
-#     else:
-#         form=LoginForm()       
-#     return render (request, 'login/login.html', {'form':form})
-
+#Registration Function
 class RegistrationView(View):
     def get(self, request):
         form = RegistrationForm()
@@ -72,13 +48,14 @@ class RegistrationView(View):
         return render(request, 'login/register.html', {'form': form})
 
 
-
+#Profile
 @login_required
 def profile(request):
     addresses = Address.objects.filter(user=request.user)
     a=EventDetails.objects.all()
     return render(request, 'admin/profile.html',{'addresses':addresses,'all':a})
 
+#Address
 @method_decorator(login_required, name='dispatch')
 class AddressView(View):
     def get(self, request):
@@ -96,6 +73,7 @@ class AddressView(View):
             messages.success(request, "New Address Added Successfully.")
         return redirect('login:profile')
 
+#Remove Address
 @login_required
 def remove_address(request, id):
     a = get_object_or_404(Address, user=request.user, id=id)
@@ -103,12 +81,13 @@ def remove_address(request, id):
     messages.success(request, "Address removed.")
     return redirect('login:profile')
 
-
+#Logout
 @login_required
 def logout_view(request):
     logout (request)
     return redirect('login:home')
 
+#Add to Cart
 @login_required
 def add_to_cart(request):
     user = request.user
@@ -125,7 +104,7 @@ def add_to_cart(request):
     
     return redirect('login:home')
 
-
+#Cart
 @login_required
 def cart(request):
     user = request.user
@@ -150,7 +129,7 @@ def cart(request):
     }
     return render(request, 'event/cart.html', context)
 
-
+#Remove Items From Cart
 @login_required
 def remove_cart(request, cart_id):
     if request.method == 'GET':
@@ -160,7 +139,7 @@ def remove_cart(request, cart_id):
     return redirect('login:cart')
 
 
-
+#Categories
 def all_categories(request):
     categories = EventCategory.objects.filter(is_active=True)
     return render(request, 'event/categories.html', {'categories':categories})
@@ -173,15 +152,7 @@ def category_products(request, slug):
     context = {'category': category,'products': products,'categories': categories,}
     return render(request, 'event/category_products.html', context)
 
-# @login_required
-# def checkout(request):
-    
-#     return render(request,'event/cart.html')
-
-
-
-
-
+#Add Category
 @login_required
 def addcat(request):
     if request.method == 'POST':
@@ -205,7 +176,7 @@ def addcat(request):
     ve=EventCategory.objects.all()
     return render(request,'event/addcategory.html',{'ve':ve} )
 
-
+#Add Details
 def details(request, slug):
     product = get_object_or_404(EventDetails, slug=slug)
     related_products = EventDetails.objects.exclude(id=product.id).filter(is_active=True, category=product.category)
@@ -216,7 +187,7 @@ def details(request, slug):
     }
     return render(request, 'event/detail.html', context)
 
-
+#Add Event Details
 @login_required
 def addevent(request):
     if request.method == 'POST':
@@ -243,20 +214,13 @@ def addevent(request):
     we=EventCategory.objects.all()
     return render(request,'./event/addevent.html',{'we':we} )
 
-
+#Delete Event Booking
 @login_required
 def deleteproduct(request,pk):
     pro=EventDetails.objects.get(id=pk)
     pro.delete()  
     print("successfully deleted")
     return redirect('login:showpage')
-
-@login_required
-def remove_address(request, id):
-    a = get_object_or_404(Address, user=request.user, id=id)
-    a.delete()
-    messages.success(request, "Address removed.")
-    return redirect('login:profile')
 
 
 @login_required
@@ -279,32 +243,17 @@ def minus_cart(request, cart_id):
             cp.quantity -= 1
             cp.save()
     return redirect('login:cart')
-    
+
+
+
+# Show Events 
 @login_required
 def showpage(request):
     a=EventDetails.objects.all()
     return render(request,'event/show.html',{'all':a})
 
 
-# @login_required
-# def edit (request,pk): 
-#     cat=EventCategory.objects.get(id=pk)
-#     pro=EventDetails.objects.get(id=pk)
-#     return render(request, 'edit/edit.html', {'stud': cat,'std':pro})
-
-# def edit_pro(request,pk):
-#     if request.method=='POST':
-#         prod=EventDetails.objects.get(id=pk)
-#         prod.Eventtitle = request.POST.get('title')
-#         prod.slug = request.POST.get('slug')
-#         prod.description=request.POST.get('age')
-#         prod.image = request.POST.get('Tname')
-#         prod.price = request.POST.get('price')
-#         prod.save() 
-#         print("successfully updated")
-#         return redirect('showpage')
-#     return render(request,'showcat.html',)
-
+#Edit Event
 @login_required
 def edit(request,pk):
     event=EventDetails.objects.get(id=pk)
@@ -324,16 +273,18 @@ def edit(request,pk):
         return redirect('showpage')
     return render(request,'edit/edit.html',{'event':event,'cat':cat })
 
+
+#Delete an Item
 @login_required
 def delete(request,pk):
     form=EventDetails.objects.get(id=pk)
     form.delete()
     return redirect('login:showpage')
 
+#Add booking 
 @login_required
 def bookings(request):
     cart=Cart.objects.all()
-
     return render (request,'event/booking.html',{'cart':cart})
         
     
